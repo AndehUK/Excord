@@ -31,7 +31,7 @@ model Guild {
   id         String @id @default(uuid())
   name       String
   imageUrl   String
-  inviteCode String
+  inviteCode String @unique
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
@@ -55,8 +55,8 @@ model Member {
   id   String     @id @default(uuid())
   role MemberRole @default(MEMBER)
 
-  profileID String
-  profile   Profile @relation(fields: [profileID], references: [id], onDelete: Cascade)
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   guildId String
   guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
@@ -64,7 +64,7 @@ model Member {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([profileID])
+  @@index([profileId])
   @@index([guildId])
 }
 

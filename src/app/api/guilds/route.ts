@@ -27,7 +27,7 @@ export async function POST(req: Request) {
                 },
                 members: {
                     create: [
-                        { profileID: profile.id, role: MemberRole.ADMIN }
+                        { profileId: profile.id, role: MemberRole.ADMIN }
                     ]
                 }
             }

@@ -1,10 +1,12 @@
-import { Guild } from "@prisma/client";
+import { Channel, ChannelType, Guild } from "@prisma/client";
 import { create } from "zustand";
 
-export type ModalType = "createGuild" | "invite" | "editGuild" | "members" | "createChannel" | "leaveGuild" | "deleteGuild";
+export type ModalType = "createGuild" | "invite" | "editGuild" | "members" | "createChannel" | "leaveGuild" | "deleteGuild" | "deleteChannel";
 
 interface ModalData {
     guild?: Guild;
+    channel?: Channel;
+    channelType?: ChannelType;
 }
 
 interface ModalStore {

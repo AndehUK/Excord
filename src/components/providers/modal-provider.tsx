@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { CreateGuildModal } from "@/components/modals/create-guild-modal";
 import { CreateChannelModal } from "@/components/modals/create-channel-modal";
+import { DeleteChannelModal } from "@/components/modals/delete-channel-modal";
 import { DeleteGuildModal } from "../modals/delete-guild-modal";
 import { EditGuildModal } from "@/components/modals/edit-guild-modal";
 import { InviteModal } from "@/components/modals/invite-modal";
@@ -25,6 +26,7 @@ export const ModalProvider = () => {
         <>
             <CreateChannelModal />
             <CreateGuildModal />
+            <DeleteChannelModal />
             <DeleteGuildModal />
             <EditGuildModal />
             <InviteModal />

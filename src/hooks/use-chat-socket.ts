@@ -1,7 +1,8 @@
-import { useSocket } from "@/components/providers/socket-provider";
-import { Member, Message, Profile } from "@prisma/client";
-import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { Member, Message, Profile } from "@prisma/client";
+
+import { useSocket } from "@/components/providers/socket-provider";
 
 type ChatSocketProps = {
     addKey: string;
@@ -12,13 +13,13 @@ type ChatSocketProps = {
 type MessageWithMemberWithProfile = Message & {
     member: Member & {
         profile: Profile;
-    };
+    }
 }
 
 export const useChatSocket = ({
     addKey,
     updateKey,
-    queryKey,
+    queryKey
 }: ChatSocketProps) => {
     const { socket } = useSocket();
     const queryClient = useQueryClient();
@@ -40,16 +41,17 @@ export const useChatSocket = ({
                         items: page.items.map((item: MessageWithMemberWithProfile) => {
                             if (item.id === message.id) {
                                 return message;
-                            };
-                        }),
-                    };
+                            }
+                            return item;
+                        })
+                    }
                 });
 
                 return {
                     ...oldData,
                     pages: newData,
-                };
-            });
+                }
+            })
         });
 
         socket.on(addKey, (message: MessageWithMemberWithProfile) => {
@@ -58,9 +60,9 @@ export const useChatSocket = ({
                     return {
                         pages: [{
                             items: [message],
-                        }],
-                    };
-                };
+                        }]
+                    }
+                }
 
                 const newData = [...oldData.pages];
 
@@ -69,7 +71,7 @@ export const useChatSocket = ({
                     items: [
                         message,
                         ...newData[0].items,
-                    ],
+                    ]
                 };
 
                 return {
